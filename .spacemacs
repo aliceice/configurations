@@ -30,7 +30,7 @@ values."
      emacs-lisp
      git
      markdown
-     ;; org
+     org
      (osx :variables osx-use-option-as-meta nil)
      (shell :variables
             shell-default-height 30
@@ -38,6 +38,7 @@ values."
      spell-checking
      syntax-checking
      version-control
+     mu4e
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -195,6 +196,18 @@ values."
   "Initialization function for user code.
 It is called immediately after `dotspacemacs/init'.  You are free to put any
 user code."
+  ;;; Set up some common mu4e variables
+  (setq mu4e-get-mail-command "offlineimap"
+        mu4e-update-interval 300
+        mu4e-compose-signature-auto-include nil
+        mu4e-view-show-images t
+        mu4e-view-show-addresses t
+        mu4e-view-prefer-html t
+        mu4e-html2text-command "textutil -stdin -format html -convert txt -stdout"
+        user-mail-address "elenaleonie@posteo.de"
+        user-full-name "Eléna Ihde-Simon")
+  (setq message-send-mail-function 'smtpmail-send-it)
+  (setq smtpmail-smtp-server "posteo.de")
   )
 
 (defun dotspacemacs/user-config ()
@@ -206,3 +219,18 @@ layers configuration. You are free to put any user code."
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(send-mail-function (quote smtpmail-send-it))
+ '(smtpmail-smtp-server "posteo.de")
+ '(smtpmail-smtp-service 25))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(company-tooltip-common ((t (:inherit company-tooltip :weight bold :underline nil))))
+ '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil)))))
