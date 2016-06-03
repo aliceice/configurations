@@ -209,7 +209,9 @@ user code."
         mu4e-compose-signature-auto-include nil
         mu4e-view-show-images t
         mu4e-view-show-addresses t
-        mu4e-view-prefer-html t)
+        mu4e-view-prefer-html t
+        mu4e-html2text-command 'mu4e-shr2text
+        mu4e-maildir-shortcuts '(("/XX/INBOX" . ?x)))
   (setq mu4e-account-alist '(("XXX"
                               (user-mail-address "XXX@XX.XX")
                               (user-full-name "XXX")
@@ -220,14 +222,13 @@ user code."
                               (mu4e-trash-folder "/XXX/trash")
                               (smtpmail-smtp-server "XXX.XX")
                               (smtpmail-smtp-user ""))))
-  (setq mu4e-maildir-shortcuts '(("/XXX/INBOX" ?x)))
   (setq message-send-mail-function 'smtpmail-send-it)
 
-  )
+)
 
 (defun dotspacemacs/user-config ()
   "Configuration function for user code.
  This function is called at the very end of Spacemacs initialization after
 layers configuration. You are free to put any user code."
   (setq clojure-enable-fancify-symbols t)
-  )
+)
