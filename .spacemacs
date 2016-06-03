@@ -25,28 +25,35 @@ values."
      ;; ----------------------------------------------------------------
      auto-completion
      ;; better-defaults
-     (colors :variables colors-enable-rainbow-identifiers t
-                        colors-enable-nyan-cat-progress-bar t)
+     (colors :variables
+             colors-enable-rainbow-identifiers t
+             colors-enable-nyan-cat-progress-bar t)
      ;;erlang
      clojure
+     dockerfile
+     (elfeed :variables
+             rmh-elfeed-org-files (list "~/elfeed.org"))
      emacs-lisp
-     (osx :variables osx-use-option-as-meta nil)
+     (osx :variables
+          osx-use-option-as-meta nil)
      git
+     games
+     html
+     javascript
      markdown
+     mu4e
      org
+     restclient
      (shell :variables
             shell-default-height 30
             shell-default-position 'left)
+     shell-scripts
      ;spell-checking
      syntax-checking
-     version-control
-     restclient
-     html
-     javascript
      typescript
-     mu4e
-     (elfeed :variables rmh-elfeed-org-files (list "~/elfeed.org"))
-     )
+     xkcd
+     yaml
+    )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages then consider to create a layer, you can also put the
