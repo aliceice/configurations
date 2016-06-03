@@ -211,6 +211,7 @@ values."
 It is called immediately after `dotspacemacs/init'.  You are free to put any
 user code."
   ;;; Set up some common mu4e variables
+  (require 'mu4e-contrib) 
   (setq mu4e-get-mail-command "offlineimap"
         mu4e-update-interval 300
         mu4e-compose-signature-auto-include nil
