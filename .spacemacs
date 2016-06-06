@@ -204,6 +204,8 @@ values."
    ;; specified with an installed package.
    ;; Not used for now. (default nil)
    dotspacemacs-default-package-repository nil
+   ;; line numbers!!
+   dotspacemacs-line-numbers t
    ))
 
 (defun dotspacemacs/user-init ()
