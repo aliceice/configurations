@@ -24,23 +24,23 @@ values."
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
      auto-completion
-     ;; better-defaults
-     (colors :variables
-             colors-enable-rainbow-identifiers t
-             colors-enable-nyan-cat-progress-bar t)
+     better-defaults
+     (colors :variables colors-enable-rainbow-identifiers t
+                        colors-enable-nyan-cat-progress-bar t)
      ;;erlang
      clojure
-     dockerfile
+     ;;dockerfile
      (elfeed :variables
-             rmh-elfeed-org-files (list "~/elfeed.org"))
+             rmh-elfeed-org-files (list "~/elfeed.org")
+             elfeed-sort-order 'ascending)
      emacs-lisp
-     (osx :variables
-          osx-use-option-as-meta nil)
+     (osx :variables osx-use-option-as-meta nil)
      git
-     games
-     html
-     javascript
-     markdown
+     ;;games
+     ;;html
+     ;;javascript
+     ;;latex
+     ;;markdown
      mu4e
      org
      restclient
@@ -48,12 +48,12 @@ values."
             shell-default-height 30
             shell-default-position 'left)
      shell-scripts
-     ;spell-checking
+     spell-checking
      syntax-checking
-     typescript
-     xkcd
-     yaml
-    )
+     ;;typescript
+     ;;xkcd
+     ;;yaml
+     )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages then consider to create a layer, you can also put the
@@ -108,10 +108,11 @@ values."
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
    ;; size to make separators look not too crappy.
    dotspacemacs-default-font '("Hack"
-                               :size 14
+                               :size 13
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)
+
    ;; The leader key
    dotspacemacs-leader-key "SPC"
    ;; The leader key accessible in `emacs state' and `insert state'
@@ -164,7 +165,7 @@ values."
    dotspacemacs-loading-progress-bar t
    ;; If non nil the frame is fullscreen when Emacs starts up. (default nil)
    ;; (Emacs 24.4+ only)
-   dotspacemacs-fullscreen-at-startup nil
+   dotspacemacs-fullscreen-at-startup t
    ;; If non nil `spacemacs/toggle-fullscreen' will not use native fullscreen.
    ;; Use to disable fullscreen animations in OSX. (default nil)
    dotspacemacs-fullscreen-use-non-native nil
@@ -204,7 +205,7 @@ values."
    ;; specified with an installed package.
    ;; Not used for now. (default nil)
    dotspacemacs-default-package-repository nil
-   ;; line numbers!!
+   ;; line numbers
    dotspacemacs-line-numbers t
    ))
 
@@ -213,32 +214,57 @@ values."
 It is called immediately after `dotspacemacs/init'.  You are free to put any
 user code."
   ;;; Set up some common mu4e variables
-  (require 'mu4e-contrib) 
-  (setq mu4e-get-mail-command "offlineimap"
+  (require 'mu4e-contrib)
+  (setq mu4e-mu-binary "/usr/local/bin/mu"
+        mu4e-get-mail-command "offlineimap"
         mu4e-update-interval 300
         mu4e-compose-signature-auto-include nil
         mu4e-view-show-images t
         mu4e-view-show-addresses t
         mu4e-view-prefer-html t
         mu4e-html2text-command 'mu4e-shr2text
-        mu4e-maildir-shortcuts '(("/XX/INBOX" . ?x)))
+        mu4e-maildir-shortcuts '(("/XXX/INBOX" . ?p)
+                                 ("/XXX/Inbox" . ?O)
+                                 ("/XXX/INBOX" . ?g))
+      )
   (setq mu4e-account-alist '(("XXX"
                               (user-mail-address "XXX@XX.XX")
-                              (user-full-name "XXX")
+                              (user-full-name "XXXX")
                               (mu4e-inbox-folder "/XXX/INBOX")
                               (mu4e-drafts-folder "/XXX/drafts")
                               (mu4e-sent-folder "/XXX/sent")
                               (mu4e-refile-folder "/XXX/Archive")
                               (mu4e-trash-folder "/XXX/trash")
                               (smtpmail-smtp-server "XXX.XX")
-                              (smtpmail-smtp-user ""))))
+                              (smtpmail-smtp-user "XXX@XX.XX")))
+        )
   (setq message-send-mail-function 'smtpmail-send-it)
-
-)
+  )
 
 (defun dotspacemacs/user-config ()
   "Configuration function for user code.
  This function is called at the very end of Spacemacs initialization after
 layers configuration. You are free to put any user code."
   (setq clojure-enable-fancify-symbols t)
-)
+  (setq paradox-github-token "XXX")
+  (add-hook 'doc-view-mode-hook 'auto-revert-mode)
+  (evilified-state-evilify-map mu4e-headers-mode-map
+    :mode mu4e-headers-mode
+    :bindings (kbd "n") 'mu4e-headers-next
+              (kbd "h") 'mu4e-view-toggle-html
+    )
+  (evilified-state-evilify-map mu4e-view-mode-map
+    :mode mu4e-view-mode
+    :bindings (kbd "n") 'mu4e-view-headers-next
+              (kbd "h") 'mu4e-view-toggle-html
+    )
+  )
+
+;; Do not write anything past this comment. This is where Emacs will
+;; auto-generate custom variable definitions.
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
